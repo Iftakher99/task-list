@@ -1,40 +1,38 @@
-let val;
+//ui vars
+const form = document.querySelector("#task-form");
+const taskList = document.querySelector(".collection");
+const clearBtn = document.querySelector(".clear-tasks");
 
-val = document;
-val = document.all;
-val = document.all[2];
-val = document.all.length;
-val = document.head;
-val = document.body;
-val = document.doctype;
-val = document.domain;
-val = document.URL;
-val = document.characterSet;
-val = document.contentType;
+const filter = document.querySelector("#filter");
+const taskInput = document.querySelector("#task");
+//Load All Event Listeners
+loadEventListeners();
+//Load All Event Listeners
+function loadEventListeners() {
+  //add task Event
+  form.addEventListener("submit", addTask);
+}
 
-val = document.forms;
-val = document.forms[0];
-val = document.forms[0].id;
-val = document.forms[0].method;
-val = document.forms[0].action;
-
-val = document.links;
-val = document.links[0];
-val = document.links[0].id;
-val = document.links[0].className;
-val = document.links[0].classList[0];
-
-val = document.images;
-
-val = document.scripts;
-val = document.scripts[2].getAttribute("src");
-
-let scripts = document.scripts;
-
-let scriptsArr = Array.from(scripts);
-
-scriptsArr.forEach(function (script) {
-  console.log(script.getAttribute("src"));
-});
-
-console.log(val);
+//Add Task Function
+function addTask(e) {
+  if (taskInput.value === "") {
+    alert("Add A task");
+  }
+  //creat li elements
+  const li = document.createElement("li");
+  // add a class
+  li.className = "collection-item";
+  //add text node and append to li
+  li.appendChild(document.createTextNode(taskInput.value));
+  // Creat NEw
+  const link = document.createElement("a");
+  link.className = "delete-item secondary-content";
+  link.innerHTML = '<i class="fa fa-remove"></i>';
+  //append to the li
+  li.appendChild(link);
+  // append li to ul
+  taskList.appendChild(li);
+  //clear input
+  taskInput.value === "";
+  e.preventDefault();
+}
